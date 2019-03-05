@@ -1,3 +1,8 @@
 - hosts: dev
-  roles: 
-        - deploy_dev
+  tasks:
+      - name: stop tomcat 
+        service: name=tomcat7 state=stopped
+      - name: copy jar
+        copy: src=/home/halodoc/halodoc-assignment/deploy/simple-application.jar  dest=/var/lib/tomcat7/webapps/
+      - name: start tomcat
+        service: name=tomcat7 state=started
